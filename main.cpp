@@ -1,8 +1,12 @@
 #include <iostream>
 #include <vector>
+#include <string>
 using namespace std;
 
 struct Player {
+    string Names;
+    int jerseyNums;
+    int ratingNums;
   /*your code here*/
 };
 
@@ -19,35 +23,31 @@ int main() {
     vector<int> jerseyNums(5);
     vector<int> ratingNums(5);
 
+    vector <Player> playerInfo(5);
+
+
     unsigned int i;
     string playerName;
-    int playerJersy;
+    int playerJersey;
     int playerRating;
     char menuOp;
 
-    //initialize the roasters
-    for (i = 0; i < jerseyNums.size(); ++i) {
-
-        cout << "Enter player " << i + 1 << "'s name:" << endl;
-        cin >> playerName;
-        Names.at(i) = playerName;
-
-        cout << "Enter player " << i + 1 << "'s jersey number:" << endl;
-        cin >> playerJersy;
-        jerseyNums.at(i) = playerJersy;
-
-        cout << "Enter player " << i + 1 << "'s rating:" << endl;
-        cin >> playerRating;
-        ratingNums.at(i) = playerRating;
-        cout << endl;
-    }
 
     cout << "ROSTER" << endl;
+    initialize(&playerInfo);
+
+    cout << "with struct" << endl;
+    for (i = 0; i < jerseyNums.size(); ++i) {
+        cout << "Player " << i + 1 << " -- Name: " << playerInfo.at(i).Names << " -- Jersey number: "
+        << playerInfo.at(i).jerseyNums << ", Rating: " << playerInfo.at(i).ratingNums << endl;
+    }
+    cout << endl;
+
+   /* cout << "without struct" << endl;
     for (i = 0; i < jerseyNums.size(); ++i) {
         cout << "Player " << i + 1 << " -- Name: " <<Names.at(i)<<" -- Jersey number: "
              << jerseyNums.at(i) << ", Rating: " << ratingNums.at(i) << endl;
-    }
-    cout << endl;
+    }*/
 
     do {
         cout << "MENU" << endl;
@@ -64,8 +64,8 @@ int main() {
         //Add
         if (menuOp == 'a') {
             cout << "Enter a new player's jersey number:" << endl;
-            cin >> playerJersy;
-            jerseyNums.push_back(playerJersy);
+            cin >> playerJersey;
+            jerseyNums.push_back(playerJersey);
 
 
             cout << "Enter the player's rating:" << endl;
@@ -77,16 +77,17 @@ int main() {
             //Delete
         else if (menuOp == 'd') {
             cout << "Enter a jersey number:" << endl;
-            cin >> playerJersy;
+            cin >> playerJersey;
             //find the player using her/his jersey number
             for (i = 0; i < jerseyNums.size(); ++i) {
-                if (playerJersy == jerseyNums.at(i)) {
-                    playerJersy = i;
+
+                if (playerJersey == jerseyNums.at(i)) {
+                    playerJersey = i;
                 }
             }
             //shift the vectors' elements up to remove the element
             for (i = 0; i < jerseyNums.size() - 1; ++i) {
-                if (i >= playerJersy) {
+                if (i >= playerJersey) {
                     Names.at(i) = Names.at(i + 1);
                     jerseyNums.at(i) = jerseyNums.at(i + 1);
                     ratingNums.at(i) = ratingNums.at(i + 1);
@@ -101,13 +102,13 @@ int main() {
             //Update
         else if (menuOp == 'u') {
             cout << "Enter a jersey number:" << endl;
-            cin >> playerJersy;
+            cin >> playerJersey;
 
             cout << "Enter a new rating for player:" << endl;
             cin >> playerRating;
 
             for (i = 0; i < jerseyNums.size(); ++i) {
-                if (jerseyNums.at(i) == playerJersy) {
+                if (jerseyNums.at(i) == playerJersey) {
                     ratingNums.at(i) = playerRating;
                 }
             }
@@ -145,4 +146,23 @@ int main() {
     } while(menuOp != 'q');
 
     return 0;
+}
+
+void initialize(vector<Player>& v){
+    //initialize the roasters
+    for (int i = 0; i < jerseyNums.size(); ++i) {
+
+        cout << "Enter player " << i + 1 << "'s name:" << endl;
+        cin >> v.at(i).Names;
+
+
+        cout << "Enter player " << i + 1 << "'s jersey number:" << endl;
+        cin >> playerJersey;
+        playerInfo.at(i).jerseyNums = playerJersey;
+
+        cout << "Enter player " << i + 1 << "'s rating:" << endl;
+        cin >> playerRating;
+        playerInfo.at(i).ratingNums = playerRating;
+        cout << endl;
+    }
 }
