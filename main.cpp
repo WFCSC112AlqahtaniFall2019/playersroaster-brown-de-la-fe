@@ -34,7 +34,7 @@ int main() {
 
 
     cout << "ROSTER" << endl;
-    initialize(&playerInfo);
+    initialize(playerInfo);
 
     cout << "with struct" << endl;
     for (i = 0; i < jerseyNums.size(); ++i) {
@@ -150,19 +150,18 @@ int main() {
 
 void initialize(vector<Player>& v){
     //initialize the roasters
-    for (int i = 0; i < jerseyNums.size(); ++i) {
+
+    for (int i = 0; i < v.size(); ++i) {
 
         cout << "Enter player " << i + 1 << "'s name:" << endl;
         cin >> v.at(i).Names;
 
 
         cout << "Enter player " << i + 1 << "'s jersey number:" << endl;
-        cin >> playerJersey;
-        playerInfo.at(i).jerseyNums = playerJersey;
+        cin >> v.at(i).jerseyNums;
 
         cout << "Enter player " << i + 1 << "'s rating:" << endl;
-        cin >> playerRating;
-        playerInfo.at(i).ratingNums = playerRating;
+        cin >> v.at(i).ratingNums;
         cout << endl;
     }
 }
